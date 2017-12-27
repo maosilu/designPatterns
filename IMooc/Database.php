@@ -8,7 +8,7 @@ class Database{
 
 	protected $db;
 	private function __construt(){
-		//这样就屏蔽了数据库类在其他地方 去new
+		//这样就屏蔽了数据库类在其他地方去new
 	}
 
 	static function getInstance(){
