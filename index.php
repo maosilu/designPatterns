@@ -1,7 +1,7 @@
 <?php
-require_once './IMooc/UserStrategy.php';
+/*require_once './IMooc/UserStrategy.php';
 require_once './IMooc/FemaleUserStrategy.php';
-require_once './IMooc/MaleUserStrategy.php';
+require_once './IMooc/MaleUserStrategy.php';*/
 
 // $db = IMooc\Factory::createDatabase(); // 工厂模式
 //$db = IMooc\Database::getInstance(); // 单例模式：此时这里无论调用多少次，都只会建立一次到数据库的连接
@@ -16,11 +16,8 @@ $db->query('show databases');
 $db->close();*/
 
 //策略模式的使用
-class Page{
+/*class Page{
 
-    /**
-     * @var \IMooc\UserStrategy
-     * */
     protected $strategy;
 
     function index(){
@@ -44,4 +41,27 @@ if(isset($_GET['female'])){
     $strategy = new IMooc\MaleUserStrategy();
 }
 $page->setStrategy($strategy);
-$page->index();
+$page->index();*/
+
+//观察者模式
+include_once './IMooc/EventGenerator.php';
+include_once './IMooc/Observer.php';
+
+class Event extends \IMooc\EventGenerator {
+	function trigger(){
+		echo "Event<br/>";
+        $this->notify();
+	}
+}
+
+class Observer1 implements \IMooc\Observer{
+    function update($event_info = null)
+    {
+        // TODO: Implement update() method.
+        echo '逻辑1';
+    }
+}
+
+$event = new Event();
+$event->addObserver(new Observer1()); //添加一个观察者1（以此类推，还可以添加更多的观察者）
+$event->trigger();
