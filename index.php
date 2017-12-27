@@ -41,7 +41,7 @@ $page = new Page();
 if(isset($_GET['female'])){
     $strategy = new IMooc\FemaleUserStrategy();
 }else{
-    $stragegy = new IMooc\MaleUserStrategy();
+    $strategy = new IMooc\MaleUserStrategy();
 }
-$page->setStrategy($stragegy);
+$page->setStrategy($strategy);
 $page->index();
